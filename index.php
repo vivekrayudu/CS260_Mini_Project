@@ -65,9 +65,9 @@ require 'config.php';
 		
 		nav a:hover {
 			color: #fff;
-			background-color: #728FCE;
+			background-color: blueviolet;
 			cursor: pointer;
-			transform: scale(1.1);
+			transform: scale(1.5);
 		}
 		
 		.container {

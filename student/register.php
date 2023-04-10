@@ -1,22 +1,7 @@
 <?php
 require 'config.php';
-if (isset($_POST['submit'])) {
-	$empid = $_POST['emp'];
-	$pwd = $_POST['pass'];
-	
-	// select query to check if profile exists 
-	$query = "SELECT * FROM users WHERE email='$empid' and pass='$pwd'";
-	$result = mysqli_query($conn, $query);
-	
-	//If there exists a row with the given credentials, then redirect to respective profile page otherwise stay on same page by alert 
-	if (mysqli_num_rows($result) != 0) {
-		session_start();
-		$_SESSION['sess_user'] = $empid;
-		header("Location: profile.php");
-	} else {
-		echo "<script>alert('Invalid email or password.')</script>";
-	}
-}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,18 +50,23 @@ if (isset($_POST['submit'])) {
 	</style>
 </head>
 <body>
+	
+
 	<form action="#" method="POST">
-		<h1>Student Login</h1>
-		<label for="email"><h3>WebMail:</h3></label>
+		<h2>Student Registration</h2>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required>
+
+		<label for="email">WebMail:</label>
 		<input type="email" id="email" name="email" required>
 
-		<label for="password"><h3>Password:</h3></label>
+		<label for="password">Password:</label>
 		<input type="password" id="password" name="password" required>
 
-		<input type="submit" value="Login">
-		No credentials yet? <a href="register.php">Register</a>
-	</form>
+		<label for="confirm_password">Confirm Password:</label>
+		<input type="password" id="confirm_password" name="confirm_password" required>
 
-	
+		<input type="submit" value="Register">
+	</form>
 </body>
 </html>
