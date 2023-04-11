@@ -28,6 +28,15 @@ require 'config.php';
 			margin-bottom: 10px;
 		}
 
+		input[type="number"] {
+			display: block;
+			width: 50%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin-bottom: auto;
+		}
+
 		input[type="submit"] {
 			background-color: blueviolet;
 			color: #fff;
@@ -38,48 +47,69 @@ require 'config.php';
 			font-weight: bold;
 			cursor: pointer;
 			transition: all 0.3s ease-in-out;
+			margin-top: 20px;
 		}
 
 		input[type="submit"]:hover {
 			background-color: #BFEFFF;
 			color: #444;
-			transform: scale(1.1);
+			transform: scale(1.1);	
 		}
+		#is_placed {
+		    font-size: 16px;
+		    padding: 5px;
+		    border-radius: 5px;
+		    border: 1px solid gray;
+		    width: 100%;
+		}
+		  /* style for the "No" option */
+		#is_placed option[value="0"] {
+		    color: red;
+		    font-weight: bold;
+		}
+		  /* style for the "Yes" option */
+		#is_placed option[value="1"] {
+		    color: green;
+		    font-weight: bold;
+		}
+		#placement_package {
+ 			margin: 0 auto;
+ 			display: block;
+		}
+
 	</style>
 </head>
 
 <body>
-	<h2>Student Registration Form</h2>
 	<form method="post" action="register.php">
+		<h1>Student Registration Form</h1>
 		<label for="name">Name:</label>
 		<input type="text" id="name" name="name" required><br>
 
-		<label for="age">Age:</label>
-		<input type="number" id="age" name="age" required><br>
+		<label for="rollno">RollNo:</label>
+		<input type="text" id="rollno" name="rollno" required><br>
 
-		<label for="marks_10">Marks in Class 10:</label>
-		<input type="number" id="marks_10" name="marks_10" required><br>
+		<div class="label-container">
+			<label for="age">Age:</label>
+			<input type="number" id="age" name="age" required>
 
-		<label for="marks_12">Marks in Class 12:</label>
-		<input type="number" id="marks_12" name="marks_12" required><br>
+			<label for="batch_year">Batch Year:</label>
+			<input type="number" id="batch_year" name="batch_year" required>
+		</div>
 
-		<label for="marks_sem1">Marks in Semester 1:</label>
-		<input type="number" id="marks_sem1" name="marks_sem1" required><br>
+		<div class="label-container">
+			<label for="marks_10">Marks in Class 10:</label>
+			<input type="number" id="marks_10" name="marks_10" required><br>
 
-		<label for="marks_sem2">Marks in Semester 2:</label>
-		<input type="number" id="marks_sem2" name="marks_sem2" required><br>
 
-		<label for="marks_sem3">Marks in Semester 3:</label>
-		<input type="number" id="marks_sem3" name="marks_sem3" required><br>
 
-		<label for="marks_sem4">Marks in Semester 4:</label>
-		<input type="number" id="marks_sem4" name="marks_sem4" required><br>
+			<label for="marks_12">Marks in Class 12:</label>
+			<input type="number" id="marks_12" name="marks_12" required><br>
+		</div>
+		
 
-		<label for="marks_sem5">Marks in Semester 5:</label>
-		<input type="number" id="marks_sem5" name="marks_sem5" required><br>
-
-		<label for="marks_sem6">Marks in Semester 6:</label>
-		<input type="number" id="marks_sem6" name="marks_sem6" required><br>
+		<label for="cpi">Your Current CPI:</label>
+		<input type="text" id="cpi" name="cpi" required><br>
 
 		<label for="specialization">Specialization:</label>
 		<input type="text" id="specialization" name="specialization" required><br>
@@ -87,20 +117,49 @@ require 'config.php';
 		<label for="area_of_interest">Area of Interest:</label>
 		<input type="text" id="area_of_interest" name="area_of_interest" required><br>
 
-		<label for="batch_year">Batch Year:</label>
-		<input type="number" id="batch_year" name="batch_year" required><br>
-
 		<label for="is_placed">Placed in a Company:</label>
-		<select id="is_placed" name="is_placed" required>
+		<select id="is_placed" name="is_placed" required onchange="togglePlacementPackage()">
+			<option value=" " selected disabled>Select</option>
 			<option value="1">Yes</option>
 			<option value="0">No</option>
-		</select><br>
+		</select><br></br><br>
 
-		<label for="placement_package">Placement Package:</label>
-		<input type="number" id="placement_package" name="placement_package"><br>
+		<div id="placement-package-container" style="display: none;">
+			<label for="placement_package">Placement Package:</label>
+			<input type="number" id="placement_package" name="placement_package"><br>
+		</div>
 
 		<input type="submit" value="Submit">
 	</form>
+
+	<script>
+		function togglePlacementPackage() {
+			var isPlaced = document.getElementById("is_placed").value;
+			var placementPackageContainer = document.getElementById("placement-package-container");
+
+			if (isPlaced == 1) {
+				placementPackageContainer.style.display = "block";
+			} else {
+				placementPackageContainer.style.display = "none";
+			}
+		}
+	</script>
 </body>
+	
+	<style>
+		.label-container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 10px;
+		}
+
+		.label-container label {
+			margin-right: 10px;
+		}
+	</style>
+</body>
+
 </html>
 
