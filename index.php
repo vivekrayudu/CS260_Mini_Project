@@ -90,8 +90,8 @@ require 'config.php';
 	</header>
 	<nav>
 		<a href="student/index.php" class="button">Student</a>  
-		<a href="#" class="button">Alumni</a>
-		<a href="#" class="button">Companies</a>
+		<a href="alumni/index.php" class="button">Alumni</a>
+		<a href="companies/index.php" class="button">Companies</a>
 	</nav>
 	<div class="container">
 		<h2>Welcome to the Placement Portal</h2>
