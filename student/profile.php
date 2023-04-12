@@ -1,8 +1,17 @@
 <?php
 include 'config.php';
+session_start();
+
+//If there is no session user, then redirect to login page 
+if (!isset($_SESSION['sess_user'])) {
+	header("location: index.php");
+}
+
+//Find various fields for an employee and save them in variables for display purposes 
+$empid = $_SESSION['sess_user'];
 
 // Fetch all student details
-$query = "SELECT * FROM student";
+$query = "SELECT * FROM student WHERE email='$empid'";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -62,7 +71,7 @@ $row = mysqli_fetch_assoc($result);
 			cursor: pointer;
 			text-align: center;
 			display: block;
-			width: 100%;
+			width: 90%;
 			margin-top: 20px;
 			transition: all 0.3s ease-in-out;
 		}
@@ -115,7 +124,7 @@ $row = mysqli_fetch_assoc($result);
 	        	<li><strong>Roll No:</strong> <?php echo $row['rollno']; ?></li>
 	        	<li><strong>Age:</strong> <?php echo $row['age']; ?></li>
 	        </ul>
-            <br><br><br>
+            <br><br><br><br>
             
 			<a href="#">Edit</a>
 		</div>
@@ -136,16 +145,16 @@ $row = mysqli_fetch_assoc($result);
 
 		<div class="card">
             <h2>Companies</h2>
-            <?php if ($row['is_placed'] == 'Yes'): ?>
+            <?php if ($row['is_placed'] == '1'): ?>
                 <ul>
                     <li><strong>Is Placed:</strong> Yes</li>
                     <li><strong>Placement Package:</strong> <?php echo $row['placement_package']; ?></li>
-                </ul>
-                <a href="#">Edit</a>
+                </ul><br><br><br><br><br><br><br>
+                <a href="eligible.php">ELigible Companies</a>
             <?php else: ?>
                 <p>You are not placed yet.</p>
                 <br><br><br><br><br><br><br><br>
-                <a href="#">Eligible Companies</a>
+                <a href="eligible.php">Eligible Companies</a>
             <?php endif; ?>
         </div>
 

@@ -122,6 +122,13 @@ if (isset($_POST['submit'])) {
  			margin: 0 auto;
  			display: block;
 		}
+		h1 {
+			background-color: blueviolet;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			font-size: 40px;
+		}
 
 	</style>
 </head>
