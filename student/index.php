@@ -1,11 +1,11 @@
 <?php
 require 'config.php';
 if (isset($_POST['submit'])) {
-	$empid = $_POST['emp'];
-	$pwd = $_POST['pass'];
+	$empid = $_POST['email'];
+	$pwd1 = $_POST['password'];
 	
 	// select query to check if profile exists 
-	$query = "SELECT * FROM users WHERE email='$empid' and pass='$pwd'";
+	$query = "SELECT * FROM student WHERE email='$empid' and pwd1='$pwd1'";
 	$result = mysqli_query($conn, $query);
 	
 	//If there exists a row with the given credentials, then redirect to respective profile page otherwise stay on same page by alert 
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
 		<label for="password"><h3>Password:</h3></label>
 		<input type="password" id="password" name="password" required>
 
-		<input type="submit" value="Login">
+		<input type="submit" id="submit" name="submit" value="Login">
 		No credentials yet? <a href="register.php">Register</a>
 	</form>
 
