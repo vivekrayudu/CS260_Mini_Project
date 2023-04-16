@@ -1,27 +1,90 @@
-<?php
-require 'congig.php';
-?>
 
+<?php
+require 'config.php';
+if (isset($_POST['submit'])) {
+	$empid = $_POST['email'];
+	$pwd1 = $_POST['password'];
+	
+	// select query to check if profile exists 
+	$query = "SELECT * FROM company WHERE email='$empid' and password='$pwd1'";
+	$result = mysqli_query($conn, $query);
+	
+	//If there exists a row with the given credentials, then redirect to respective profile page otherwise stay on same page by alert 
+	if (mysqli_num_rows($result) != 0) {
+		session_start();
+		$_SESSION['sess_user'] = $empid;
+		header("Location: profile.php");
+	} else {
+		echo "<script>alert('Invalid email or password.')</script>";
+	}
+}
+?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>companies</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <h>Welcome to Companies section.</h>
-        
-        <script src="" async defer></script>
-    </body>
+<head>
+	<title>Company Login</title>
+	<style>
+		form {
+			max-width: 500px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		input[type="text"], input[type="email"], input[type="password"] {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin-bottom: 10px;
+		}
+
+		input[type="submit"] {
+			background-color: blueviolet;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			padding: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #BFEFFF;
+			color: #444;
+			transform: scale(1.1);
+		}
+		h1 {
+			background-color: blueviolet;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			font-size: 40px;
+		}
+	</style>
+</head>
+<body>
+	<form action="#" method="POST">
+		<h1>Company Login</h1>
+		<label for="email"><h3>User ID</h3></label>
+		<input type="email" id="email" name="email" required>
+
+		<label for="password"><h3>Password:</h3></label>
+		<input type="password" id="password" name="password" required>
+
+		<input type="submit" id="submit" name="submit" value="Login">
+		No credentials yet? <a href="register.php">Register</a>
+	</form>
+
+	
+</body>
 </html>

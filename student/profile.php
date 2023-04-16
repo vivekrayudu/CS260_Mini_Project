@@ -14,6 +14,20 @@ $empid = $_SESSION['sess_user'];
 $query = "SELECT * FROM student WHERE email='$empid'";
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
+
+if (isset($_POST['logout'])) {
+    // Clear all session variables
+    session_unset();
+    
+    // Destroy the session
+    session_destroy();
+    
+    // Redirect to the login page or homepage
+    header('Location: index.php');
+    exit;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -112,7 +126,7 @@ $row = mysqli_fetch_assoc($result);
 <body>
 	<div class="header">
 		<h1>Student Dashboard</h1>
-		<div class="logout"><a href="index.php">Logout</a></div>
+		<div class="logout" name="logout"><a href="index.php">Logout</a></div>
 	</div>
 
 	<div class="container">
