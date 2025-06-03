@@ -2,7 +2,7 @@
 
 
 
-github : vivekrayudu jayanthmarupaka Praneeth351
+github : vivekrayudu 
 
 
-Roll No : 2101CS65 2101CS44 2101CS29
+Roll No : 2101CS65 
